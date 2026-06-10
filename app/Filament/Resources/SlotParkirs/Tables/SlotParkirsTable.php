@@ -20,13 +20,12 @@ class SlotParkirsTable
                     ->sortable(),
                     
                 TextColumn::make('status')
-                    ->label('Status')
-                    ->badge() // Membuat tampilan seperti label warna-warni
-                    ->color(fn (string $state): string => match ($state) {
-                        'Tersedia' => 'success', // Warna Hijau
-                        'Terisi' => 'danger',   // Warna Merah
-                        default => 'gray',
-                    }),
+    ->badge()
+    ->formatStateUsing(fn (string $state): string => match ($state) {
+        'kosong' => 'Kosong',
+        'terisi' => 'Terisi',
+        default => $state,
+    }),
             ])
             ->filters([
                 //

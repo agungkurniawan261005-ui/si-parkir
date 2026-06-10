@@ -16,14 +16,14 @@ class SlotParkirForm
                     ->label('Kode Slot (Contoh: A1, B2)')
                     ->required()
                     ->maxLength(10),
-                
+
                 Select::make('status')
                     ->label('Status Slot')
                     ->options([
-                        'Tersedia' => 'Tersedia',
-                        'Terisi' => 'Terisi',
+                        'kosong' => 'Kosong',
+                        'terisi' => 'Terisi',
                     ])
-                    ->default('Tersedia') // Set default ke Tersedia saat membuat baru
+                    ->default('kosong')
                     ->required(),
             ]);
     }

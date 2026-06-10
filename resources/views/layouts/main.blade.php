@@ -12,8 +12,8 @@
         <div class="container mx-auto flex items-center justify-between">
             
             <div class="flex-1">
-                <a href="/" class="block w-max">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo SIPARK" class="h-16p w-auto transition transform hover:scale-105">
+                <a href="/">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo SIPARK" class="h-16 w-auto transition transform hover:scale-105">
                 </a>
             </div>
             

@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Informasi Parkir</title>
+    
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="flex flex-col min-h-screen bg-cover bg-center bg-no-repeat bg-fixed text-gray-800 relative z-0" style="background-image: url('/images/bg-web.png');">
 

@@ -79,3 +79,10 @@ Route::get('/lacak-parkir', function (Request $request) {
 
     return view('lacak-parkir', compact('platNomor', 'kendaraan', 'transaksi', 'tarif', 'estimasiBiaya', 'durasiJam'));
 });
+Route::get('/tentang-kami', function () {
+    return view('tentang-kami');
+});
+
+Route::get('/tim-kami', function () {
+    return view('tim-kami');
+});

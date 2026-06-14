@@ -16,6 +16,15 @@ class TarifsTable
             ->columns([
                 TextColumn::make('jenis_kendaraan')
                     ->label('Jenis Kendaraan')
+                    ->formatStateUsing(fn (string $state): string => ucfirst($state))
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'motor' => 'info',
+                        'mobil' => 'success',
+                        'truk' => 'warning',
+                        'bis' => 'danger',
+                        default => 'gray',
+                    })
                     ->searchable()
                     ->sortable(),
                     

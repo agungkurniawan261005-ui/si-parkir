@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
 use Filament\Schemas\Schema;
@@ -13,27 +14,33 @@ class UserForm
     {
         return $schema
             ->components([
-                TextInput::make('name')
+                TextInput::make('nama')
                     ->label('Nama Lengkap')
                     ->required()
                     ->maxLength(255),
                 
-                TextInput::make('email')
-                    ->label('Alamat Email')
-                    ->email()
+                TextInput::make('username')
+                    ->label('Username')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->unique(ignoreRecord: true),
                 
                 TextInput::make('password')
                     ->label('Kata Sandi')
                     ->password()
-                    // Mengenkripsi password secara otomatis
                     ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                    // Mencegah password tertimpa kosong saat admin mengedit data lain
                     ->dehydrated(fn ($state) => filled($state))
-                    // Wajib diisi hanya saat membuat user baru
                     ->required(fn (string $operation): bool => $operation === 'create')
                     ->maxLength(255),
+
+                Select::make('role')
+                    ->label('Role')
+                    ->options([
+                        'admin' => 'Admin',
+                        'petugas' => 'Petugas',
+                    ])
+                    ->default('petugas')
+                    ->required(),
 
                 FileUpload::make('avatar_url')
                     ->label('Foto Profil')

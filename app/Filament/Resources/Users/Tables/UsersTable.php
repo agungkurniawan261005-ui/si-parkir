@@ -6,7 +6,6 @@ use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
 
-// Murni menggunakan Filament\Actions (Tanpa kata "Tables")
 use Filament\Actions\EditAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -21,28 +20,31 @@ class UsersTable
                     ->label('Foto')
                     ->circular(),
 
-                TextColumn::make('name')
+                TextColumn::make('nama')
                     ->label('Nama Lengkap')
+                    ->searchable()
+                    ->weight('bold'),
+                
+                TextColumn::make('username')
+                    ->label('Username')
                     ->searchable(),
                 
-                TextColumn::make('email')
-                    ->label('Email')
-                    ->searchable(),
-                
-                TextColumn::make('created_at')
-                    ->label('Dibuat Pada')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('role')
+                    ->label('Role')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => ucfirst($state))
+                    ->color(fn (string $state): string => match ($state) {
+                        'admin' => 'danger',
+                        'petugas' => 'info',
+                        default => 'gray',
+                    }),
             ])
             ->filters([
                 //
             ])
-            // Di v5, metode actions() diganti menjadi recordActions()
             ->recordActions([
                 EditAction::make(),
             ])
-            // Dan bulkActions() diganti menjadi toolbarActions()
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class SlotParkir extends Model
 {
@@ -11,4 +12,10 @@ class SlotParkir extends Model
     public $timestamps = false;
 
     protected $fillable = ['kode_slot', 'status'];
+
+    // Relasi: Slot memiliki banyak Transaksi
+    public function transaksis(): HasMany
+    {
+        return $this->hasMany(Transaksi::class, 'id_slot', 'id_slot');
+    }
 }

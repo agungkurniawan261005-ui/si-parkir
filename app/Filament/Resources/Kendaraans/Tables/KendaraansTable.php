@@ -16,18 +16,34 @@ class KendaraansTable
             ->columns([
                 TextColumn::make('plat_nomor')
                     ->label('Plat Nomor')
-                    ->searchable(),
+                    ->searchable()
+                    ->weight('bold'),
                     
                 TextColumn::make('jenis_kendaraan')
                     ->label('Jenis Kendaraan')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => ucfirst($state))
+                    ->color(fn (string $state): string => match ($state) {
+                        'motor' => 'info',
+                        'mobil' => 'success',
+                        'truk' => 'warning',
+                        'bis' => 'danger',
+                        default => 'gray',
+                    })
                     ->sortable(),
                     
                 TextColumn::make('pemilik')
                     ->label('Pemilik')
                     ->searchable(),
                     
-                TextColumn::make('id_tarif')
-                    ->label('ID Tarif'),
+                // Tampilkan nama tarif dari relasi, bukan angka ID
+                TextColumn::make('tarif.jenis_kendaraan')
+                    ->label('Tarif')
+                    ->formatStateUsing(fn ($state, $record) => 
+                        ucfirst($state) . ' — Rp ' . number_format($record->tarif?->tarif_per_jam ?? 0, 0, ',', '.')
+                    )
+                    ->badge()
+                    ->color('gray'),
             ])
             ->filters([
                 //

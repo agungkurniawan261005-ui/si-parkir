@@ -20,12 +20,18 @@ class SlotParkirsTable
                     ->sortable(),
                     
                 TextColumn::make('status')
-    ->badge()
-    ->formatStateUsing(fn (string $state): string => match ($state) {
-        'kosong' => 'Kosong',
-        'terisi' => 'Terisi',
-        default => $state,
-    }),
+                    ->label('Status')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => match ($state) {
+                        'kosong' => 'Kosong',
+                        'terisi' => 'Terisi',
+                        default => $state,
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        'kosong' => 'success',
+                        'terisi' => 'danger',
+                        default => 'gray',
+                    }),
             ])
             ->filters([
                 //

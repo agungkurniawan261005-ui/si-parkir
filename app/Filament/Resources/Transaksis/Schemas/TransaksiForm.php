@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\Transaksis\Schemas;
 
+use App\Models\Kendaraan;
+use App\Models\SlotParkir;
+use App\Models\User;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -13,22 +16,32 @@ class TransaksiForm
     {
         return $schema
             ->components([
-                // Sementara kita gunakan ID angka. 
-                // Nanti saat relasi Eloquent sudah terpasang, ini bisa diganti jadi Select Dropdown yang menarik nama.
-                TextInput::make('id_kendaraan')
-                    ->label('ID Kendaraan')
-                    ->numeric()
-                    ->required(),
+                // Dropdown Kendaraan: tampilkan plat nomor + pemilik
+                Select::make('id_kendaraan')
+                    ->label('Kendaraan')
+                    ->options(fn () => Kendaraan::all()->mapWithKeys(fn ($k) => [
+                        $k->id_kendaraan => $k->plat_nomor . ' — ' . $k->pemilik . ' (' . ucfirst($k->jenis_kendaraan) . ')'
+                    ]))
+                    ->required()
+                    ->searchable(),
                 
-                TextInput::make('id_slot')
-                    ->label('ID Slot Parkir')
-                    ->numeric()
-                    ->required(),
+                // Dropdown Slot Parkir: tampilkan kode slot + status
+                Select::make('id_slot')
+                    ->label('Slot Parkir')
+                    ->options(fn () => SlotParkir::all()->mapWithKeys(fn ($s) => [
+                        $s->id_slot => $s->kode_slot . ' — ' . ucfirst($s->status)
+                    ]))
+                    ->required()
+                    ->searchable(),
 
-                TextInput::make('id_user')
-                    ->label('ID Petugas (User)')
-                    ->numeric()
-                    ->required(),
+                // Dropdown Petugas: tampilkan nama user
+                Select::make('id_user')
+                    ->label('Petugas')
+                    ->options(fn () => User::all()->mapWithKeys(fn ($u) => [
+                        $u->id_user => $u->nama . ' (' . $u->username . ')'
+                    ]))
+                    ->required()
+                    ->searchable(),
 
                 DateTimePicker::make('waktu_masuk')
                     ->label('Waktu Masuk')
@@ -45,10 +58,10 @@ class TransaksiForm
                 Select::make('status')
                     ->label('Status Transaksi')
                     ->options([
-                        'Masuk' => 'Kendaraan Masuk',
-                        'Keluar' => 'Kendaraan Keluar',
+                        'masuk' => 'Kendaraan Masuk',
+                        'keluar' => 'Kendaraan Keluar',
                     ])
-                    ->default('Masuk')
+                    ->default('masuk')
                     ->required(),
             ]);
     }

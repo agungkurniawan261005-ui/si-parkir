@@ -14,40 +14,48 @@ class TransaksisTable
     {
         return $table
             ->columns([
-                TextColumn::make('id_kendaraan')
-                    ->label('ID Kendaraan')
+                // Tampilkan plat nomor dari relasi kendaraan
+                TextColumn::make('kendaraan.plat_nomor')
+                    ->label('Kendaraan')
+                    ->description(fn ($record) => $record->kendaraan?->pemilik)
+                    ->searchable()
                     ->sortable(),
 
-                TextColumn::make('id_slot')
-                    ->label('ID Slot')
+                // Tampilkan kode slot dari relasi slotParkir
+                TextColumn::make('slotParkir.kode_slot')
+                    ->label('Slot Parkir')
+                    ->badge()
+                    ->color('info')
                     ->sortable(),
 
                 TextColumn::make('waktu_masuk')
                     ->label('Waktu Masuk')
-                    ->dateTime('d M Y, H:i') // Format: 01 Jan 2026, 14:30
+                    ->dateTime('d M Y, H:i')
                     ->sortable(),
 
                 TextColumn::make('waktu_keluar')
                     ->label('Waktu Keluar')
                     ->dateTime('d M Y, H:i')
-                    ->sortable(),
+                    ->sortable()
+                    ->placeholder('— Belum keluar —'),
 
                 TextColumn::make('total_bayar')
                     ->label('Total Bayar')
-                    ->money('IDR', locale: 'id') // Format Rp otomatis
+                    ->money('IDR', locale: 'id')
                     ->sortable(),
 
                 TextColumn::make('status')
                     ->label('Status')
                     ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        'Masuk' => 'warning', // Warna Kuning/Oranye
-                        'Keluar' => 'success', // Warna Hijau
+                    ->formatStateUsing(fn (string $state): string => ucfirst($state))
+                    ->color(fn (string $state): string => match (strtolower($state)) {
+                        'masuk' => 'warning',
+                        'keluar' => 'success',
                         default => 'gray',
                     }),
             ])
             ->filters([
-                // Tambahkan filter jika diperlukan nanti
+                //
             ])
             ->recordActions([
                 EditAction::make(),
@@ -57,6 +65,6 @@ class TransaksisTable
                     DeleteBulkAction::make(),
                 ]),
             ])
-            ->defaultSort('waktu_masuk', 'desc'); // Otomatis mengurutkan dari transaksi terbaru
+            ->defaultSort('waktu_masuk', 'desc');
     }
 }

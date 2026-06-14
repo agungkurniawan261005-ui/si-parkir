@@ -26,6 +26,7 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar /
         'username',
         'password',
         'role',
+        'avatar_url',
     ];
 
     protected $hidden = [

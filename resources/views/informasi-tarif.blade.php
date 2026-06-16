@@ -25,7 +25,7 @@
                     <p class="text-3xl font-extrabold text-blue-600">
                         Rp {{ number_format($tarif->tarif_per_jam, 0, ',', '.') }}
                     </p>
-                    <p class="text-sm text-gray-500 mt-1">per detik</p>
+                    <p class="text-sm text-gray-500 mt-1">per jam</p>
                 </div>
             @endforeach
         </div>

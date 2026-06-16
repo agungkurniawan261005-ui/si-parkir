@@ -8,97 +8,73 @@
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
-        
-        <!-- Member 1 -->
-        <div class="group bg-white/80 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 overflow-hidden transform transition-all hover:-translate-y-2 hover:shadow-xl hover:shadow-brand-500/10 duration-300 animate-fade-in-up">
-            <div class="h-32 bg-gradient-to-r from-brand-600 to-cyan-500 relative overflow-hidden">
-                <!-- Decorative background pattern -->
-                <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 16px 16px;"></div>
-            </div>
-            <div class="flex justify-center -mt-16 relative z-10">
-                <div class="relative">
-                    <div class="absolute inset-0 bg-brand-500 rounded-full blur group-hover:blur-md transition-all opacity-50"></div>
-                    <img src="https://ui-avatars.com/api/?name=Agung+Kurniawan&background=0f172a&color=fff&size=128" alt="Profil Agung Kurniawan" class="w-32 h-32 rounded-full border-4 border-white object-cover relative z-10">
-                </div>
-            </div>
-            <div class="p-6 text-center">
-                <h3 class="text-xl font-bold text-slate-800 mb-1">Agung Kurniawan</h3>
-                <p class="text-brand-600 font-semibold text-sm uppercase tracking-wider mb-4">Project Manager / Backend</p>
-                <div class="bg-slate-50 text-slate-500 text-xs py-1.5 px-4 rounded-full inline-block font-mono border border-slate-100 shadow-inner">NIM: 0110125049</div>
-            </div>
-        </div>
+        @php
+            $memberStyles = [
+                [
+                    'gradient' => 'from-brand-600 to-cyan-500',
+                    'avatar_bg' => '0f172a',
+                    'blur_bg' => 'bg-brand-500',
+                    'role' => 'Project Manager / Backend',
+                    'nim' => '0110125049',
+                    'delay' => ''
+                ],
+                [
+                    'gradient' => 'from-cyan-500 to-blue-500',
+                    'avatar_bg' => '0D8ABC',
+                    'blur_bg' => 'bg-cyan-500',
+                    'role' => 'System Analyst',
+                    'nim' => '0110125xxx',
+                    'delay' => 'animation-delay-100'
+                ],
+                [
+                    'gradient' => 'from-blue-500 to-indigo-500',
+                    'avatar_bg' => '3b82f6',
+                    'blur_bg' => 'bg-blue-500',
+                    'role' => 'Frontend Developer',
+                    'nim' => '0110125xxx',
+                    'delay' => 'animation-delay-200'
+                ],
+                [
+                    'gradient' => 'from-indigo-500 to-purple-500',
+                    'avatar_bg' => '6366f1',
+                    'blur_bg' => 'bg-indigo-500',
+                    'role' => 'UI/UX Designer',
+                    'nim' => '0110125xxx',
+                    'delay' => 'animation-delay-300'
+                ],
+                [
+                    'gradient' => 'from-purple-500 to-pink-500',
+                    'avatar_bg' => 'a855f7',
+                    'blur_bg' => 'bg-purple-500',
+                    'role' => 'Database Admin',
+                    'nim' => '0110125xxx',
+                    'delay' => 'animation-delay-400'
+                ]
+            ];
+        @endphp
 
-        <!-- Member 2 -->
-        <div class="group bg-white/80 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 overflow-hidden transform transition-all hover:-translate-y-2 hover:shadow-xl hover:shadow-brand-500/10 duration-300 animate-fade-in-up animation-delay-100">
-            <div class="h-32 bg-gradient-to-r from-cyan-500 to-blue-500 relative overflow-hidden">
-                <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 16px 16px;"></div>
-            </div>
-            <div class="flex justify-center -mt-16 relative z-10">
-                <div class="relative">
-                    <div class="absolute inset-0 bg-cyan-500 rounded-full blur group-hover:blur-md transition-all opacity-50"></div>
-                    <img src="https://ui-avatars.com/api/?name=Nama+Anggota2&background=0D8ABC&color=fff&size=128" alt="Profil Anggota 2" class="w-32 h-32 rounded-full border-4 border-white object-cover relative z-10">
+        @foreach($users as $index => $user)
+            @php
+                $style = $memberStyles[$index % count($memberStyles)];
+            @endphp
+            <div class="group bg-white/80 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 overflow-hidden transform transition-all hover:-translate-y-2 hover:shadow-xl hover:shadow-brand-500/10 duration-300 animate-fade-in-up {{ $style['delay'] }}">
+                <div class="h-32 bg-gradient-to-r {{ $style['gradient'] }} relative overflow-hidden">
+                    <!-- Decorative background pattern -->
+                    <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 16px 16px;"></div>
+                </div>
+                <div class="flex justify-center -mt-16 relative z-10">
+                    <div class="relative">
+                        <div class="absolute inset-0 {{ $style['blur_bg'] }} rounded-full blur group-hover:blur-md transition-all opacity-50"></div>
+                        <img src="{{ $user->avatar_url ? asset('storage/' . $user->avatar_url) : 'https://ui-avatars.com/api/?name='.urlencode($user->nama).'&background='.$style['avatar_bg'].'&color=fff&size=128' }}" alt="Profil {{ $user->nama }}" class="w-32 h-32 rounded-full border-4 border-white object-cover relative z-10">
+                    </div>
+                </div>
+                <div class="p-6 text-center">
+                    <h3 class="text-xl font-bold text-slate-800 mb-1">{{ $user->nama }}</h3>
+                    <p class="text-brand-600 font-semibold text-sm uppercase tracking-wider mb-4">{{ $style['role'] }}</p>
+                    <div class="bg-slate-50 text-slate-500 text-xs py-1.5 px-4 rounded-full inline-block font-mono border border-slate-100 shadow-inner">NIM: {{ $style['nim'] }}</div>
                 </div>
             </div>
-            <div class="p-6 text-center">
-                <h3 class="text-xl font-bold text-slate-800 mb-1">Nama Anggota 2</h3>
-                <p class="text-brand-600 font-semibold text-sm uppercase tracking-wider mb-4">System Analyst</p>
-                <div class="bg-slate-50 text-slate-500 text-xs py-1.5 px-4 rounded-full inline-block font-mono border border-slate-100 shadow-inner">NIM: 0110125xxx</div>
-            </div>
-        </div>
-
-        <!-- Member 3 -->
-        <div class="group bg-white/80 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 overflow-hidden transform transition-all hover:-translate-y-2 hover:shadow-xl hover:shadow-brand-500/10 duration-300 animate-fade-in-up animation-delay-200">
-            <div class="h-32 bg-gradient-to-r from-blue-500 to-indigo-500 relative overflow-hidden">
-                <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 16px 16px;"></div>
-            </div>
-            <div class="flex justify-center -mt-16 relative z-10">
-                <div class="relative">
-                    <div class="absolute inset-0 bg-blue-500 rounded-full blur group-hover:blur-md transition-all opacity-50"></div>
-                    <img src="https://ui-avatars.com/api/?name=Nama+Anggota3&background=3b82f6&color=fff&size=128" alt="Profil Anggota 3" class="w-32 h-32 rounded-full border-4 border-white object-cover relative z-10">
-                </div>
-            </div>
-            <div class="p-6 text-center">
-                <h3 class="text-xl font-bold text-slate-800 mb-1">Nama Anggota 3</h3>
-                <p class="text-brand-600 font-semibold text-sm uppercase tracking-wider mb-4">Frontend Developer</p>
-                <div class="bg-slate-50 text-slate-500 text-xs py-1.5 px-4 rounded-full inline-block font-mono border border-slate-100 shadow-inner">NIM: 0110125xxx</div>
-            </div>
-        </div>
-
-        <!-- Member 4 -->
-        <div class="group bg-white/80 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 overflow-hidden transform transition-all hover:-translate-y-2 hover:shadow-xl hover:shadow-brand-500/10 duration-300 animate-fade-in-up animation-delay-300">
-            <div class="h-32 bg-gradient-to-r from-indigo-500 to-purple-500 relative overflow-hidden">
-                <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 16px 16px;"></div>
-            </div>
-            <div class="flex justify-center -mt-16 relative z-10">
-                <div class="relative">
-                    <div class="absolute inset-0 bg-indigo-500 rounded-full blur group-hover:blur-md transition-all opacity-50"></div>
-                    <img src="https://ui-avatars.com/api/?name=Nama+Anggota4&background=6366f1&color=fff&size=128" alt="Profil Anggota 4" class="w-32 h-32 rounded-full border-4 border-white object-cover relative z-10">
-                </div>
-            </div>
-            <div class="p-6 text-center">
-                <h3 class="text-xl font-bold text-slate-800 mb-1">Nama Anggota 4</h3>
-                <p class="text-brand-600 font-semibold text-sm uppercase tracking-wider mb-4">UI/UX Designer</p>
-                <div class="bg-slate-50 text-slate-500 text-xs py-1.5 px-4 rounded-full inline-block font-mono border border-slate-100 shadow-inner">NIM: 0110125xxx</div>
-            </div>
-        </div>
-
-        <!-- Member 5 -->
-        <div class="group bg-white/80 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 overflow-hidden transform transition-all hover:-translate-y-2 hover:shadow-xl hover:shadow-brand-500/10 duration-300 animate-fade-in-up animation-delay-400">
-            <div class="h-32 bg-gradient-to-r from-purple-500 to-pink-500 relative overflow-hidden">
-                <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 16px 16px;"></div>
-            </div>
-            <div class="flex justify-center -mt-16 relative z-10">
-                <div class="relative">
-                    <div class="absolute inset-0 bg-purple-500 rounded-full blur group-hover:blur-md transition-all opacity-50"></div>
-                    <img src="https://ui-avatars.com/api/?name=Nama+Anggota5&background=a855f7&color=fff&size=128" alt="Profil Anggota 5" class="w-32 h-32 rounded-full border-4 border-white object-cover relative z-10">
-                </div>
-            </div>
-            <div class="p-6 text-center">
-                <h3 class="text-xl font-bold text-slate-800 mb-1">Nama Anggota 5</h3>
-                <p class="text-brand-600 font-semibold text-sm uppercase tracking-wider mb-4">Database Admin</p>
-                <div class="bg-slate-50 text-slate-500 text-xs py-1.5 px-4 rounded-full inline-block font-mono border border-slate-100 shadow-inner">NIM: 0110125xxx</div>
-            </div>
-        </div>
+        @endforeach
 
     </div>
 </div>

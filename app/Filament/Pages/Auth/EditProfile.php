@@ -25,6 +25,7 @@ class EditProfile extends BaseEditProfile
                     ->avatar()
                     ->imageEditor()
                     ->circleCropper()
+                    ->disk('public')
                     ->directory('avatars')
             ]);
     }

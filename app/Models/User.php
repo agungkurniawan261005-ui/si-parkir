@@ -49,6 +49,6 @@ class User extends Authenticatable implements FilamentUser, HasName, HasAvatar /
     public function getFilamentAvatarUrl(): ?string
     {
         // Menggunakan kolom 'avatar_url' dari database db_parkir
-        return $this->avatar_url ? Storage::url($this->avatar_url) : null;
+        return $this->avatar_url ? \Illuminate\Support\Facades\Storage::disk('public')->url($this->avatar_url) : null;
     }
 }

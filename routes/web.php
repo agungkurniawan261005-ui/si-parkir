@@ -84,5 +84,6 @@ Route::get('/tentang-kami', function () {
 });
 
 Route::get('/tim-kami', function () {
-    return view('tim-kami');
+    $users = App\Models\User::all();
+    return view('tim-kami', compact('users'));
 });

@@ -18,7 +18,8 @@ class UsersTable
             ->columns([
                 ImageColumn::make('avatar_url')
                     ->label('Foto')
-                    ->circular(),
+                    ->circular()
+                    ->disk('public'),
 
                 TextColumn::make('nama')
                     ->label('Nama Lengkap')

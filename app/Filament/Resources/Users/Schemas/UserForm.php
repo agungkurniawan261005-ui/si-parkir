@@ -47,6 +47,7 @@ class UserForm
                     ->avatar()
                     ->imageEditor()
                     ->circleCropper()
+                    ->disk('public')
                     ->directory('avatars')
             ]);
     }

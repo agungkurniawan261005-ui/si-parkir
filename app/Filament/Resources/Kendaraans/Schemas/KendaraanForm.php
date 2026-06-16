@@ -17,7 +17,23 @@ class KendaraanForm
                     ->label('Plat Nomor')
                     ->placeholder('Contoh: B 1234 ABC')
                     ->required()
-                    ->maxLength(20),
+                    ->maxLength(20)
+                    ->extraInputAttributes(['style' => 'text-transform: uppercase'])
+                    ->lazy() // Update saat pindah input (blur) agar kursor tidak lompat
+                    ->afterStateUpdated(function (?string $state, callable $set) {
+                        if (!$state) return;
+                        // Format otomatis: B 1234 ABC
+                        $plat = strtoupper(preg_replace('/[^A-Z0-9]/i', '', $state));
+                        preg_match('/^([A-Z]{1,2})([0-9]{1,4})([A-Z]{0,3})$/', $plat, $matches);
+                        if (count($matches) >= 3) {
+                            $result = $matches[1] . ' ' . $matches[2];
+                            if (isset($matches[3]) && $matches[3] != '') $result .= ' ' . $matches[3];
+                            $set('plat_nomor', $result);
+                        } else {
+                            $set('plat_nomor', $plat);
+                        }
+                    })
+                    ->dehydrateStateUsing(fn ($state) => strtoupper($state)),
                 
                 // Ambil jenis kendaraan dari tabel tarif agar selalu sinkron
                 Select::make('jenis_kendaraan')

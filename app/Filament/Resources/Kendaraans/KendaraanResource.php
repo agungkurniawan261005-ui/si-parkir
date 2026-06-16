@@ -18,6 +18,10 @@ class KendaraanResource extends Resource
 {
     protected static ?string $model = Kendaraan::class;
 
+    protected static ?string $navigationLabel = 'Kendaraan Aktif (Masuk)';
+    protected static ?string $modelLabel = 'Kendaraan Aktif (Masuk)';
+    protected static ?string $pluralModelLabel = 'Kendaraan Aktif (Masuk)';
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'plat_nomor';

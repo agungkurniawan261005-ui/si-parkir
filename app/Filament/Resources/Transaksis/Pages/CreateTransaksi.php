@@ -30,4 +30,15 @@ class CreateTransaksi extends CreateRecord
 
         return $data;
     }
+
+    protected function afterCreate(): void
+    {
+        $transaksi = $this->record;
+        if ($transaksi->id_slot && strtolower($transaksi->status) === 'masuk') {
+            $slot = \App\Models\SlotParkir::find($transaksi->id_slot);
+            if ($slot) {
+                $slot->update(['status' => 'terisi']);
+            }
+        }
+    }
 }

@@ -65,17 +65,17 @@
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
                 @foreach($slots as $slot)
                     <div class="group relative aspect-square rounded-2xl flex flex-col items-center justify-center p-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 overflow-hidden cursor-default
-                        {{ $slot->status == 'Tersedia' ? 'bg-emerald-50 border-2 border-emerald-100 text-emerald-700' : 'bg-rose-50 border-2 border-rose-100 text-rose-700' }}">
+                        {{ $slot->status == 'kosong' ? 'bg-emerald-50 border-2 border-emerald-100 text-emerald-700' : 'bg-rose-50 border-2 border-rose-100 text-rose-700' }}">
                         
                         <!-- Background glow effect on hover -->
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 {{ $slot->status == 'Tersedia' ? 'bg-gradient-to-br from-emerald-400 to-transparent' : 'bg-gradient-to-br from-rose-400 to-transparent' }}"></div>
+                        <div class="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-300 {{ $slot->status == 'kosong' ? 'bg-gradient-to-br from-emerald-400 to-transparent' : 'bg-gradient-to-br from-rose-400 to-transparent' }}"></div>
 
                         <span class="block text-3xl font-black mb-2 relative z-10">{{ $slot->kode_slot }}</span>
                         
                         <div class="relative z-10 w-full flex justify-center">
                             <span class="text-xs font-semibold px-3 py-1 rounded-full shadow-sm w-full text-center
-                                {{ $slot->status == 'Tersedia' ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700' }}">
-                                {{ $slot->status }}
+                                {{ $slot->status == 'kosong' ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700' }}">
+                                {{ $slot->status == 'kosong' ? 'Tersedia' : 'Terisi' }}
                             </span>
                         </div>
                     </div>

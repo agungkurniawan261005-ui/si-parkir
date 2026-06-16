@@ -39,4 +39,16 @@ class EditTransaksi extends EditRecord
 
         return $data;
     }
+
+    protected function afterSave(): void
+    {
+        $transaksi = $this->record;
+        // Jika status diubah menjadi keluar, kosongkan slot
+        if ($transaksi->id_slot && strtolower($transaksi->status) === 'keluar') {
+            $slot = \App\Models\SlotParkir::find($transaksi->id_slot);
+            if ($slot) {
+                $slot->update(['status' => 'kosong']);
+            }
+        }
+    }
 }

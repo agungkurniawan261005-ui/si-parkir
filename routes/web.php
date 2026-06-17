@@ -18,8 +18,8 @@ Route::get('/cek-slot', function () {
     
     // Hitung statistik
     $total = $slots->count();
-    $tersedia = $slots->where('status', 'Tersedia')->count();
-    $terisi = $slots->where('status', 'Terisi')->count();
+    $tersedia = $slots->where('status', 'kosong')->count();
+    $terisi = $slots->where('status', 'terisi')->count();
 
     // Kirim data ke tampilan cek-slot.blade.php
     return view('cek-slot', compact('slots', 'total', 'tersedia', 'terisi'));
@@ -78,4 +78,12 @@ Route::get('/lacak-parkir', function (Request $request) {
     }
 
     return view('lacak-parkir', compact('platNomor', 'kendaraan', 'transaksi', 'tarif', 'estimasiBiaya', 'durasiJam'));
+});
+Route::get('/tentang-kami', function () {
+    return view('tentang-kami');
+});
+
+Route::get('/tim-kami', function () {
+    $users = App\Models\User::all();
+    return view('tim-kami', compact('users'));
 });

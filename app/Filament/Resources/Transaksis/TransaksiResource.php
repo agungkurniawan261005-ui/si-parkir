@@ -18,6 +18,10 @@ class TransaksiResource extends Resource
 {
     protected static ?string $model = Transaksi::class;
 
+    protected static ?string $navigationLabel = 'Riwayat Transaksi (Keluar)';
+    protected static ?string $modelLabel = 'Riwayat Transaksi (Keluar)';
+    protected static ?string $pluralModelLabel = 'Riwayat Transaksi (Keluar)';
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     public static function form(Schema $schema): Schema

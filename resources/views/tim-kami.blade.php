@@ -23,7 +23,7 @@
                     'avatar_bg' => '0D8ABC',
                     'blur_bg' => 'bg-cyan-500',
                     'role' => 'System Analyst',
-                    'nim' => '0110125xxx',
+                    'nim' => '0110125095',
                     'delay' => 'animation-delay-100'
                 ],
                 [
@@ -31,7 +31,7 @@
                     'avatar_bg' => '3b82f6',
                     'blur_bg' => 'bg-blue-500',
                     'role' => 'Frontend Developer',
-                    'nim' => '0110125xxx',
+                    'nim' => '0110125011',
                     'delay' => 'animation-delay-200'
                 ],
                 [
@@ -39,7 +39,7 @@
                     'avatar_bg' => '6366f1',
                     'blur_bg' => 'bg-indigo-500',
                     'role' => 'UI/UX Designer',
-                    'nim' => '0110125xxx',
+                    'nim' => '0110125026',
                     'delay' => 'animation-delay-300'
                 ],
                 [
@@ -47,7 +47,7 @@
                     'avatar_bg' => 'a855f7',
                     'blur_bg' => 'bg-purple-500',
                     'role' => 'Database Admin',
-                    'nim' => '0110125xxx',
+                    'nim' => '0110125154',
                     'delay' => 'animation-delay-400'
                 ]
             ];

@@ -27,7 +27,7 @@
                     <p class="text-3xl font-extrabold text-blue-600">
                         Rp {{ number_format($tarif->tarif_per_jam, 0, ',', '.') }}
                     </p>
-                    <p class="text-sm text-gray-500 mt-1">per detik</p>
+                    <p class="text-sm text-gray-500 mt-1">per jam</p>
                 </div>
             @endforeach
         </div>
@@ -38,7 +38,7 @@
             </div>
             <div>
                 <h4 class="font-semibold text-brand-900 mb-1">Catatan Penting</h4>
-                <p class="text-sm text-brand-700 leading-relaxed">Sistem kami menggunakan perhitungan per detik untuk memberikan tarif yang paling adil. Estimasi total biaya akan otomatis muncul saat Anda melacak kendaraan Anda menggunakan plat nomor.</p>
+                <p class="text-sm text-brand-700 leading-relaxed">Sistem kami menggunakan perhitungan per jam untuk memberikan tarif yang paling adil. Estimasi total biaya akan otomatis muncul saat Anda melacak kendaraan Anda menggunakan plat nomor.</p>
             </div>
         </div>
     </div>

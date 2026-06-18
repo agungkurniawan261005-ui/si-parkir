@@ -12,7 +12,7 @@ class KendaraanSeeder extends Seeder
      */
     public function run(): void
     {
-        \Illuminate\Support\Facades\DB::table('kendaraan')->insert([
+        $kendaraans = [
             ['plat_nomor' => 'B 1234 ABC', 'jenis_kendaraan' => 'motor', 'pemilik' => 'Ahmad Fauzi',    'id_tarif' => 1],
             ['plat_nomor' => 'D 5678 XYZ', 'jenis_kendaraan' => 'mobil', 'pemilik' => 'Rina Wati',      'id_tarif' => 2],
             ['plat_nomor' => 'F 9999 QRS', 'jenis_kendaraan' => 'motor', 'pemilik' => 'Dedi Cahyono',   'id_tarif' => 1],
@@ -21,6 +21,10 @@ class KendaraanSeeder extends Seeder
             ['plat_nomor' => 'B 7777 STU', 'jenis_kendaraan' => 'truk',  'pemilik' => 'PT Maju Jaya',   'id_tarif' => 3],
             ['plat_nomor' => 'D 1111 VWX', 'jenis_kendaraan' => 'motor', 'pemilik' => 'Yudi Pratama',   'id_tarif' => 1],
             ['plat_nomor' => 'E 2222 YZA', 'jenis_kendaraan' => 'mobil', 'pemilik' => 'Dewi Anggraini', 'id_tarif' => 2],
-        ]);
+        ];
+
+        foreach ($kendaraans as $k) {
+            \App\Models\Kendaraan::create($k);
+        }
     }
 }

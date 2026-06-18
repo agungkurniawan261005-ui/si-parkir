@@ -7,49 +7,27 @@
             <p class="text-slate-500 max-w-2xl mx-auto">Tarif parkir transparan dan terjangkau. Dihitung secara presisi berdasarkan waktu kendaraan Anda berada di area parkir.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            @foreach($tarifs as $index => $tarif)
-                <div class="bg-white/80 backdrop-blur-md rounded-3xl shadow-sm border border-slate-100 overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 animate-fade-in-up group relative" style="animation-delay: {{ $index * 100 }}ms;">
-                    
-                    <!-- Top accent border -->
-                    <div class="h-2 w-full bg-gradient-to-r from-brand-400 to-cyan-400"></div>
-                    
-                    <div class="p-8 text-center relative z-10">
-                        <div class="w-20 h-20 mx-auto bg-brand-50 rounded-2xl flex items-center justify-center text-4xl mb-6 shadow-inner transform transition-transform group-hover:scale-110 group-hover:rotate-3 duration-300">
-                            @if(strtolower($tarif->jenis_kendaraan) == 'motor')
-                                🏍️
-                            @elseif(strtolower($tarif->jenis_kendaraan) == 'mobil')
-                                🚗
-                            @elseif(strtolower($tarif->jenis_kendaraan) == 'truk')
-                                🚚
-                            @else
-                                🚙
-                            @endif
-                        </div>
-                        
-                        <h3 class="text-xl font-bold text-slate-800 uppercase tracking-wide mb-4">{{ $tarif->jenis_kendaraan }}</h3>
-                        
-                        <div class="flex items-baseline justify-center gap-1 mb-2">
-                            <span class="text-slate-500 font-semibold">Rp</span>
-                            <span class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-cyan-600">{{ number_format($tarif->tarif_per_jam, 0, ',', '.') }}</span>
-                        </div>
-                        
-                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-slate-50 rounded-full text-xs font-medium text-slate-500 mb-6">
-                            <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            Tarif per Detik
-                        </div>
-                        
-                        <ul class="text-sm text-slate-500 space-y-3 text-left">
-                            <li class="flex items-center gap-2">
-                                <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Area parkir khusus
-                            </li>
-                            <li class="flex items-center gap-2">
-                                <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Keamanan 24 jam
-                            </li>
-                        </ul>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            @foreach($tarifs as $tarif)
+                <div class="bg-white rounded-xl shadow-sm p-6 text-center border-t-4 border-blue-500 hover:shadow-lg transition transform hover:-translate-y-1">
+                    <div class="text-5xl mb-4">
+                        @if(strtolower($tarif->jenis_kendaraan) == 'motor')
+                            🏍️
+                        @elseif(strtolower($tarif->jenis_kendaraan) == 'mobil')
+                            🚗
+                        @elseif(strtolower($tarif->jenis_kendaraan) == 'truk')
+                            🚚
+                        @else
+                            🚙
+                        @endif
                     </div>
+                    
+                    <h3 class="text-2xl font-bold text-gray-700 uppercase mb-2">{{ $tarif->jenis_kendaraan }}</h3>
+                    
+                    <p class="text-3xl font-extrabold text-blue-600">
+                        Rp {{ number_format($tarif->tarif_per_jam, 0, ',', '.') }}
+                    </p>
+                    <p class="text-sm text-gray-500 mt-1">per detik</p>
                 </div>
             @endforeach
         </div>

@@ -18,7 +18,7 @@ class ParkirSeeder extends Seeder
             TarifSeeder::class,
             KendaraanSeeder::class,
             SlotParkirSeeder::class,
-            TransaksiSeeder::class,
+            // TransaksiSeeder::class, // Dinonaktifkan sementara agar tidak ikut ter-seed
         ]);
     }
 }

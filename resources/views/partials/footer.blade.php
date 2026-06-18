@@ -1,4 +1,4 @@
-<footer class="mt-auto border-t border-slate-200/60 bg-white/50 backdrop-blur-md">
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/50 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-2">
                 <div class="w-8 h-8 bg-brand-500 rounded-lg flex items-center justify-center text-white font-bold text-sm">P</div>

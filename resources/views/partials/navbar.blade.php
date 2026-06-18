@@ -1,4 +1,4 @@
-<nav class="bg-white/70 backdrop-blur-lg border-b border-white/50 text-slate-800 p-4 sticky top-0 z-50 transition-all duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.03)]">
+    <nav class="bg-white/70 backdrop-blur-lg border-b border-white/50 text-slate-800 p-4 sticky top-0 z-50 transition-all duration-300 shadow-[0_4px_30px_rgba(0,0,0,0.03)]">
         <div class="container mx-auto flex items-center justify-between">
 
             <div class="flex-1">
